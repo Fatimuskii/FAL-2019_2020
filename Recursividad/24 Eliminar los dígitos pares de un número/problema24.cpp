@@ -68,8 +68,8 @@ bool resuelveCaso() {
     if (!std::cin)
         return false;
     
-    //long long int sol = resolverNoFinal(numero); // no final
-    long long int sol= resolverFinal(numero, 0, 1); 
+    //long long int sol = resolverNoFinal(numero); // no final CORRECT
+    long long int sol= resolverFinal(numero, 0, 1); // WRONG ANSWER
 
     // escribir sol
     std::cout << sol << '\n';
