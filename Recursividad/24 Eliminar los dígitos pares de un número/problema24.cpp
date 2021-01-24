@@ -10,23 +10,51 @@
 
 // función que resuelve el problema
 // devuelve el numero de digitos
-long long int resolver(long long int num, int potencia) {
+// Final & No Final 
 
+// NO FINAL 
+long long int resolverNoFinal(long long int num) {
 
+    // 1 digito
+    //caso base
     if (num < 10) {
-        if (num % 2 == 1) return num * potencia;
-        else return 0;
+        if (num % 2 == 1) // es impar
+            return num;
+        else
+            return 0; 
     }
     else {
-        if ((num % 10) % 2 == 1) {
-            long long int resto = num % 10 * potencia;
-            potencia = potencia * 10;
-            return resolver(num / 10, potencia) + resto;
+        long long digito = num / 10; 
+        if ((num % 10) % 2 == 1) { // es impar 
+            return resolverNoFinal(digito)*10 + num%10; // lo que me llega + lo impar que es lo que me interesa
         }
         else
-            return resolver(num / 10, potencia) + 0;
-
+            return resolverNoFinal(digito);  
     }
+
+}
+
+
+// FINAL 
+long long int resolverFinal(long long int num, long long int suma, int potencia) {
+
+    // caso base
+    if (num< 10) {
+        if (num % 2 == 1) // es impar
+            return (num*potencia) + suma;
+        else
+            return suma;
+    }
+
+    else {
+
+        long long int digito = num / 10; // para hacer la recursion 
+        if ((num % 10) % 2 == 1) // ultimo digito 
+            return resolverFinal(digito,  (num%10)*potencia + suma, potencia*10);
+        else
+            return resolverFinal(digito, suma, potencia); 
+    }
+
 
 }
 
@@ -40,12 +68,11 @@ bool resuelveCaso() {
     if (!std::cin)
         return false;
     
-    int potencia = 1;
-
-    long long int sol = resolver(numero, potencia);
+    //long long int sol = resolverNoFinal(numero); // no final
+    long long int sol= resolverFinal(numero, 0, 1); 
 
     // escribir sol
-    std::cout << sol<< '\n';
+    std::cout << sol << '\n';
 
     return true;
 
