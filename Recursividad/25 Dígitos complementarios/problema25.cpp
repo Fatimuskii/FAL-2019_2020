@@ -14,7 +14,6 @@
 
 // FINAL 
 int resolverFinal(int num,int suma, int potencia) {
-
     // caso base
     if (num < 10) {
         return (9 - num) * potencia + suma;
@@ -45,15 +44,16 @@ int resolverNoFinal(int num) {
 
 }
 
-int invertir(int numero, int resultado) {
-    if (numero < 10) {
-        return resultado * 10 + numero;
-    }
-    else {
-        int digito = numero / 10;
-        return invertir(digito, numero % 10 + resultado * 10);
-    }
+int invertir(int numero, int res) {
+   if (res == 0 && numero < 10) 
+        return 9- numero;
+   
+    else if (numero == 0)
+       return res;
 
+    else 
+        return invertir(numero / 10,res*10 + (9 - (numero % 10)));
+      
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -68,7 +68,7 @@ bool resuelveCaso() {
 
     //long long int sol = resolverFinal(numero, 0, 1);
     
-    auto inv = invertir(sol, 0); 
+    auto inv = invertir(numero, 0); 
     // escribir sol
     std::cout << sol <<" " << inv << '\n';
 
